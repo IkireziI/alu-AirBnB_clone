@@ -1,41 +1,173 @@
-Project Description
+# The AirBnB Clone Project
+![AirBnB Logo](https://www.pngitem.com/pimgs/m/132-1322125_transparent-background-airbnb-logo-hd-png-download.png)
 
-This project is the initial step in constructing an AirBnB clone, serving as the foundation for subsequent tasks such as HTML/CSS templating,database storage, API development, and front-end integration. The primary goal is to establish a parent class, BaseModel, responsible for the initialization, serialization, and deserialization of future instances. The project also involves implementing a basic flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file. Additionally, various classes (User, State, City, Place, etc.) are created, all inheriting from the BaseModel. The first abstracted storage engine for the project, File storage, is introduced along with comprehensive unittests to validate classes and the storage engine
+## Project Description
+This is the first part of the AirBnB clone project where we worked on the backend of the project whiles interfacing it with a console application with the help of the cmd module in python.
 
-Command Interpreter
-The command interpreter is akin to the Shell but tailored for the specific needs of our project. It enables the management of objects within the AirBnB project, allowing users to:
+Data (python objects) generated are stored in a json file and can be accessed with the help of the json module in python
 
-1.Create a new object: Generate a new User, Place, or other relevant objects.
+## Description of the command interpreter:
+The interface of the application is just like the Bash shell except that this has a limited number of accepted commands that were solely defined for the purposes of the usage of the AirBnB website.
 
-2.Retrieve an object: Fetch an object from a file, database, or other storage mediums.
+This command line interpreter  serves as the frontend of the web app where users can interact with the backend which was developed with python OOP programming.
 
-3.Perform operations on objects: Conduct operations such as counting, computing stats, and more.
+Some of the commands available are:
+- show
+- create
+- update
+- destroy
+- count
 
-4.Update attributes: Modify attributes of an existing object.
+And as part of the implementation of the command line interpreter coupled with the backend and file storage system, the folowing actions can be performed:
+-   Creating new objects (ex: a new User or a new Place)
+-   Retrieving an object from a file, a database etc…
+-   Doing operations on objects (count, compute stats, etc…)
+-   Updating attributes of an object
+-   Destroying an object
 
-5.Destroy an object: Remove an object from the system.
+## How to start it
+These instructions will get you a copy of the project up and running on your local machine (Linux distro) for development and testing purposes.
 
-How to Start
+## Installing
 
-1.git clone https://github.com/sergekamanzi/AirBnB-Clone.git
-2.cd AirBnB-Clone
-3./console.py
+You will need to clone the repository of the project from Github. This will contain the simple shell program and all of its dependencies.
 
-How to Use
+https://github.com/IkireziI/alu-AirBnB_clone.git
 
-1.create: Create a new object. Example: create User
+After cloning the repository you will have a folder called AirBnB_clone. In here there will be several files that allow the program to work.
 
-2.show: Display details of a specific object. Example: show User 1234-1234-1234
+> /console.py : The main executable of the project, the command interpreter.
+>
+> models/engine/file_storage.py: Class that serializes instances to a JSON file and deserializes JSON file to instances
+> 
+> models/__ init __.py:  A unique FileStorage instance for the application
+> 
+> models/base_model.py: Class that defines all common attributes/methods for other classes.
+> 
+> models/user.py: User class that inherits from BaseModel
+> 
+>models/state.py: State class that inherits from BaseModel
+>
+>models/city.py: City class that inherits from BaseModel
+>
+>models/amenity.py: Amenity class that inherits from BaseModel
+>
+>models/place.py: Place class that inherits from BaseModel
+>
+>models/review.py: Review class that inherits from BaseModel
 
-3.destroy: Remove an object. Example: destroy Place 5678-5678-5678
-
-4.update: Modify attributes of an object. Example: update State 9876-9876-9876 name "California"
-
-5.all: Display all objects or all objects of a specific class. Example: all or all City
-
-6.quit: Exit the command interpreter. Example: quit
 
 
-This project serves as a crucial step towards constructing a full-fledged web application, emphasizing good software design practices, maintainability, and extensibility. As development progresses, this foundation will prove instrumental in implementing more advanced features and functionalities for the AirBnB clone.
+## How to use it
+It can work in two different modes:
 
-thanks to serge kamanzi and Excel Asaph
+
+*Interactive* and *Non-interactive*.
+
+In *Interactive mode*, the console will display a prompt (hbnb) indicating that the user can write and execute a command. After the command is run, the prompt will appear again a wait for a new command. This can go indefinitely as long as the user does not exit the program.
+
+
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
+
+
+In *Non-interactive mode*, the shell will need to be run with a command input piped into its execution so that the command is run as soon as the Shell starts. In this mode no prompt will appear, and no further input will be expected from the user.
+
+
+
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+
+
+## Format of Command Input
+
+In order to give commands to the console, these will need to be piped through an echo in case of  *Non-interactive mode*.
+
+In  *Interactive Mode*  the commands will need to be written with a keyboard when the prompt appears and will be recognized when an enter key is pressed (new line). As soon as this happens, the console will attempt to execute the command through several means or will show an error message if the command didn't run successfully. In this mode, the console can be exited using the *CTRL + D* combination,  *CTRL + C, or the command **quit* or *EOF*.
+
+## Arguments
+
+Most commands have several options or arguments that can be used when executing the program. In order for the Shell to recognize those parameters, the user must separate everything with spaces.
+
+Example:
+
+
+
+user@ubuntu:~/AirBnB$ ./console.py
+(hbnb) create BaseModel
+49faff9a-6318-451f-87b6-910505c55907
+user@ubuntu:~/AirBnB$ ./console.py
+
+
+
+or
+
+
+user@ubuntu:~/AirBnB$ ./console.py $ echo "create BaseModel" | ./console.py
+(hbnb)
+e37ebcd3-f8e1-4c1f-8095-7a019070b1fa
+(hbnb)
+user@ubuntu:~/AirBnB$ ./console.py
+
+
+## Available commands and what they do
+
+The recognizable commands by the interpreter are the following:
+
+|Command| Description |
+|--|--|
+| *quit or EOF* | Exits the program |
+| *Usage* | By itself |
+| *-----* | *-----* |
+| *help* | Provides a text describing how to use a command.  |
+| *Usage* | By itself --or-- *help <command\>* |
+| *-----* | *-----* |
+| *create* | Creates a new instance of a valid Class, saves it (to the JSON file) and prints the id.  Valid classes are: BaseModel, User, State, City, Amenity, Place, Review. |
+| *Usage* | *create <class name\>*|
+| *-----* | *-----* |
+| *show* | Prints the string representation of an instance based on the class name and id  |
+| *Usage* | *show <class name\> <id\>* --or-- *<class name\>.show(<id\>)*|
+| *-----* | *-----* |
+| *destroy* | Deletes an instance based on the class name and id (saves the change into a JSON file).  |
+| *Usage* | *destroy <class name\> <id\>* --or-- *<class name>.destroy(<id>)* |
+| *-----* | *-----* |
+| *all* | Prints all string representation of all instances based or not on the class name.  |
+| *Usage* | By itself or *all <class name\>* --or-- *<class name\>.all()* |
+| *-----* | *-----* |
+| *update* | Updates an instance based on the class name and id by adding or updating attribute (saves the changes into a JSON file).  |
+| *Usage* | *update <class name\> <id\> <attribute name\> "<attribute value\>"* ---or--- *<class name\>.update(<id\>, <attribute name\>, <attribute value\>)* --or-- *<class name\>.update(<id\>, <dictionary representation\>)*|
+| *-----* | *-----* |
+| *count* | Retrieve the number of instances of a class.  |
+| *Usage* | *<class name\>.count()* |
+
+## Authors
+
+Heritier SEBAGENI | : Github: [HeritierS] email:(h.sebageni@alustudent.com) 
+
+Inès IKIREZI | Github: [IkireziI] email:(i.ikirezi@alustudent.com)
